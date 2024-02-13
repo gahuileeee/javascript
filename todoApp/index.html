@@ -8,33 +8,63 @@
 	  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
     <script>
-        window.onload = function(){
-            const todoList= document.getElementById('todoList');
-            const inputTodo = document.getElementsByClassName('form-control')[0];
-            const btnAdd=document.getElementById('btnAdd');
+      window.onload = function(){
+    const todoList = document.getElementById('todoList');
+    const inputTodo = document.getElementsByClassName('form-control')[0];
+    const btnAdd = document.getElementById('btnAdd');
 
-            btnAdd.addEventListener('click', function(e){
-                let todoValue= inputTodo.value;
-                if(todoValue == ""){
-                    alert('할일을 입력하세요.');
-                    return;
-                }
-                const listItem =document.createElement('li');
-                listItem.className='d-flex list-group-item';
-                listItem.innerText=todoValue;
+    function loadTodoList() {
+        const storedTodos = JSON.parse(localStorage.getItem('todos'));
+        if (storedTodos) {
+            storedTodos.forEach(todo => {
+                const listItem = document.createElement('li');
+                listItem.className = 'd-flex list-group-item';
+                listItem.innerText = todo;
 
                 const listBtn = document.createElement('button');
                 listBtn.className = 'btn-close ms-auto';
-                listBtn.onclick=function(e){
-                    let pNode=e.target.parentNode;
-                    pNode.remove();
-                   }
+                listBtn.onclick = removeTodoItem;
 
                 listItem.appendChild(listBtn);
                 todoList.appendChild(listItem);
-                inputTodo.value="";
             });
-        };
+        }
+    }
+
+    function saveTodoList() {
+        const todos = Array.from(todoList.children).map(todo => todo.innerText);
+        localStorage.setItem('todos', JSON.stringify(todos));
+    }
+
+    loadTodoList();
+
+    btnAdd.addEventListener('click', function(e){
+        let todoValue = inputTodo.value;
+        if(todoValue == ""){
+            alert('할일을 입력하세요.');
+            return;
+        }
+        const listItem = document.createElement('li');
+        listItem.className = 'd-flex list-group-item';
+        listItem.innerText = todoValue;
+
+        const listBtn = document.createElement('button');
+        listBtn.className = 'btn-close ms-auto';
+        listBtn.onclick =function(e){
+            if(confirm('삭제하시겠습니까?')){
+                let pNode=e.target.parentNode;
+                pNode.remove();
+                saveTodoList();
+            }
+        }
+        
+        listItem.appendChild(listBtn);
+        todoList.appendChild(listItem);
+        inputTodo.value = "";
+
+        saveTodoList(); 
+    });
+};
     </script>
     </head>
 <body>
