@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.함수</title>
+</head>
+<body>
+    <h3>3.함수</h3>
+    <script>
+        //선언함수
+        function f(x){
+            let y= 2*x+3;
+            return y;
+        
+        }
+        let y1= f(1);
+        document.write('y1 : '+y1+'<br>');
+
+        //익명함수
+        let a =function(x,y){
+            let z =x+y;
+            return z;
+            }
+        let z1= a(3,4);
+        document.write('z1 : '+z1+'<br>');
+
+        //화살표함수
+        let b =(x,y)=>{return x+y};
+        let c = (x,y)=> x+y;
+        let r1= b(1,2);
+        let r2=c(1,2);
+        document.write('r1 : '+r1+'<br>');
+        document.write('r2 : '+r2+'<br>');
+
+        //내장함수 ->숫자 관련
+        let str1 = '10';
+        let str2 = '3.14';
+        let str3 = '2024년';
+        
+        let var1 = parseInt(str1);
+        let var2 = parseInt(str2);
+        let var3 = parseInt(str3);
+        let var4 = parseFloat(str2);
+
+        let var5= isNaN(str3); //숫자가 아니냐 확인 (not a number)
+        let var6= isNaN(var1);
+        document.write('var1+var2+Var3 = '+(var1+var2+var3)+'<br>');
+        document.write('var1+var2+Var3 = '+(var1+var4+var3)+'<br>');
+        document.write('var5 = '+var5+'<br>');
+        document.write('var6 = '+var6+'<br>');
+        
+        //내장함수 ->변환 관련
+        let num1=1;
+        let num2=2;
+            
+        let rs1 = Number(str1);
+        let rs2 = Number(str2);
+        let rs3 = String(num1);
+        let rs4 = String(num2); 
+        //내장함수 ->타이머 관련
+        setTimeout(function(){
+            console.log('3초 후에 실행!');
+        },3000); //3초 후에 fucntion 실행
+
+        setTimeout(() => {
+            console.log('5초 후에 실행!');
+        }, 5000);
+
+        setInterval(function(){
+            console.log('3초 마다 실행!');
+        },3000);
+
+        //내장함수 ->대화상자 관련
+        alert('기본 대화 상자');
+
+        let result = confirm('확인, 취소 대화상자'); 
+        //확인이면 true, 취소면 false
+
+        if(result){
+            alert('확인을 눌렀습니다.');
+        }else{
+            alert('취소를 눌렀습니다.');
+        }
+
+        let value = prompt('사용자 값 입력 대화상자');
+        alert(value);
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.배열</title>
+</head>
+<body>
+    <script>
+        let arr = [1,2,3,4,5];
+        //출력
+        for(let i=0; i<arr.length; i++){
+            document.write(arr[i]);
+        }
+        document.write('<br>');
+        //배열 반복문 여기서 i는 java와 다르게 index임
+        for(let i in arr){
+            document.write(arr[i]);
+        }
+        document.write('<br>');
+        //이 of에서는 java와 똑같이 값을 나타냄
+        for(let i of arr){
+            document.write(i);
+        }
+        document.write('<br>');
+        //2차원 배열
+        const arr2d = [[1,2,3],[4,5,6],[7,8,9]];
+        document.write('arr2d[0][0] : '+arr2d[0][0]+'<br>');
+
+    </script>
+</body>
+</html>

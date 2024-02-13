@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.이벤트객체</title>
+    <style>
+        #container{
+            width: 600px;
+            height: 300px;
+            border: 1px solid black;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+
+            //이벤트 객체 정보
+            const container =document.getElementById('container');
+            const spnas =document.getElementsByTagName('span');
+
+            container.addEventListener('mousemove',function(e){ //e는 event객체
+                console.log(e);
+
+                spnas[0].innerText= e.clientX;
+                spnas[1].innerText= e.clientY;
+                spnas[2].innerText= e.pageX;
+                spnas[3].innerText= e.pageY;
+                spnas[4].innerText= e.screenX; //window화면을 기준으로 좌표
+                spnas[5].innerText= e.screenY;
+                spnas[6].innerText= e.target; //여기서 target은 container를 가르킴
+                spnas[7].innerText= e.timeStamp; //event 발생한 시간
+            });
+
+            //기본 이벤트 취소
+            const a= document.getElementsByTagName('a');
+            const form = document.getElementsByTagName('form')[0];
+
+            a[0].onclick = (e)=>{
+                //태그의 기본 이벤트 취소
+                e.preventDefault();
+                alert('네이버 클릭!');
+            }
+            a[1].onclick = (e)=>{
+                alert('구글 클릭');
+                return false; //이것도 기본 이벤트 취소함 (얘가 1번, 그 뒤 태그 속성이 2번임)
+            }
+
+            form.onsubmit = (e)=>{
+                e.preventDefault();
+                alert('전송!!');
+            }
+        }
+    </script>
+</head>
+<body>
+    <h3>3. 이벤트 객체</h3>
+       
+    <div id="container">
+
+    </div>
+    <h4>주요속성</h4>
+    <p>
+        client x: <span>0</span><br>
+        client y: <span>0</span><br>
+        page x: <span>0</span><br>
+        page y: <span>0</span><br>
+        screen x: <span>0</span><br>
+        screen y: <span>0</span><br>
+        target: <span>0</span><br>
+        timestamp: <span>0</span><br>
+    </p>
+
+    <h4>기본 이벤트 취소</h4>
+    <a href="https://naver.com">네이버</a>
+    <a href="https://google.com">구글</a>
+
+    <form action="https://google.com">
+        <input type="text" name="value">
+        <input type="submit" name="전송">
+    </form>
+</body>
+</html>
