@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>user1::list</title>
+	</head>
+   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+      /* 초기화 */
+    
+    ul, ol {list-style: none;}
+    a {text-decoration: none; color: #111;}
+
+    input, textarea {outline: none;}
+    *{ font-family: "Noto Sans KR", sans-serif;}
+        table th{
+            background-color: rgb(243, 213, 218);
+        }
+    a{border: 1px solid rgb(206, 171, 177);}
+   </style>
+
+	<body>
+		<h3>user1 목록</h3>
+		
+		<a href="/ch10/index.jsp">처음으로</a>
+		<a href="/ch10/user1/register.do">등록하기</a>
+		<table border="1">
+			<tr>
+				<th>아이디</th>
+				<th>이름</th>
+				<th>생년월일</th>
+				<th>휴대폰</th>
+				<th>나이</th>
+				<th>관리</th>
+			</tr>
+			<c:forEach var="user" items="${users}">
+			<tr>
+				<td>${user.getUid()}</td>
+				<td>${user.getName()}</td>
+				<td>${user.getBirth()}</td>
+				<td>${user.hp}</td>
+				<!-- 표현언어 안에서는 hp등은 private 선언되었지만 직접 참조 가능 -->
+				<td>${user.getAge()}</td>
+				<td>
+					<a href="/ch10/user1/modify.do?uid=${user.uid}">수정</a>
+					<a href="/ch10/user1/delete.do?uid=${user.uid}">삭제</a>
+				</td>
+			</tr>
+			</c:forEach>
+		</table>
+	</body>
+</html>
